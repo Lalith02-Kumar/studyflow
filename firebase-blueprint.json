@@ -1,0 +1,44 @@
+{
+  "entities": {
+    "Task": {
+      "title": "Task",
+      "description": "A study task for a student.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique ID of the task." },
+        "name": { "type": "string", "description": "Name of the task." },
+        "deadline": { "type": "string", "format": "date", "description": "Deadline for the task." },
+        "priority": { "type": "string", "enum": ["High", "Medium", "Low"], "description": "Priority of the task." },
+        "subject": { "type": "string", "description": "Subject the task belongs to." },
+        "completed": { "type": "boolean", "description": "Whether the task is completed." },
+        "uid": { "type": "string", "description": "User ID of the task owner." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the task was created." },
+        "completedAt": { "type": "string", "format": "date-time", "description": "Timestamp when the task was completed." }
+      },
+      "required": ["name", "deadline", "priority", "subject", "completed", "uid", "createdAt"]
+    },
+    "Session": {
+      "title": "Session",
+      "description": "A study session in the time planner.",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string", "description": "Unique ID of the session." },
+        "slot": { "type": "string", "enum": ["Morning", "Afternoon", "Evening"], "description": "Time slot for the session." },
+        "title": { "type": "string", "description": "Title of the study session." },
+        "uid": { "type": "string", "description": "User ID of the session owner." },
+        "createdAt": { "type": "string", "format": "date-time", "description": "Timestamp when the session was created." }
+      },
+      "required": ["slot", "title", "uid", "createdAt"]
+    }
+  },
+  "firestore": {
+    "/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "User study tasks."
+    },
+    "/sessions/{sessionId}": {
+      "schema": "Session",
+      "description": "User study sessions."
+    }
+  }
+}
